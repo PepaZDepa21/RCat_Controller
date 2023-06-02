@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RCat_Controller.EditAction">
+    <ContentPage.Content>
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Label Text="Action name" Grid.Row="0" TextColor="Black" VerticalOptions="Center"/>
+            <Entry Text="{Binding Name}" Grid.Row="1"/>
+            <Label Text="Action description" Grid.Row="2" TextColor="Black" VerticalOptions="Center"/>
+            <Editor x:Name="DescriptionEditor" Text="{Binding Description}" Keyboard="Plain" AutoSize="TextChanges" Grid.Row="3"/>
+            <Button Padding="50, 0" Text="Save" Grid.Row="5" BackgroundColor="Black" TextColor="White" Clicked="BtnSaveClicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

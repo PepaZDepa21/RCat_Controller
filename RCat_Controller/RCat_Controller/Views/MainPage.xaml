@@ -6,38 +6,56 @@
     <StackLayout Padding="40, 30">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <ListView x:Name="ActionsLW" SeparatorVisibility="None" Grid.Row="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Button Text="{Binding Name}"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                <Button Text="{Binding Name}" Grid.Row="0" BackgroundColor="Black" TextColor="White" Clicked="BtnActionClicked"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ImageButton Grid.Column="2" Grid.Row="1" Source="ArrowUp.png" BackgroundColor="White" Aspect="AspectFit"/>
-                <ImageButton Grid.Column="1" Grid.Row="2" Source="ArrowRotateLeft.png" BackgroundColor="White" Aspect="AspectFit"/>
-                <ImageButton Grid.Column="3" Grid.Row="2" Source="ArrowRotateRight.png" BackgroundColor="White" Aspect="AspectFit"/>
-                <ImageButton Grid.Column="2" Grid.Row="3" Source="ArrowDown.png" BackgroundColor="White" Aspect="AspectFit"/>
+                <CheckBox x:Name="CBEnableEditing" Grid.Column="1" Color="Black"/>
+                <Label Text="Edit actions" Grid.Column="2" VerticalOptions="Center" TextColor="Black"/>
+                <Button Text="Add action" BackgroundColor="Black" TextColor="White" Grid.Column="3" FontSize="Micro" Clicked="BtnAddClicked"/>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ImageButton Grid.Column="2" Grid.Row="1" Source="Up.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnMoveUpClicked"/>
+                <ImageButton Grid.Column="1" Grid.Row="2" Source="Left.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnRotationLeftClicked"/>
+                <ImageButton Grid.Column="3" Grid.Row="2" Source="Right.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnRotationRightClicked"/>
+                <ImageButton Grid.Column="2" Grid.Row="3" Source="Down.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnMoveDownClicked"/>
             </Grid>
         </Grid>
     </StackLayout>
