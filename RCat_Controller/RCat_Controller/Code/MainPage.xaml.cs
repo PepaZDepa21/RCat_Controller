@@ -101,7 +101,7 @@ namespace RCat_Controller
             if (BtnMoveUp.IsPressed)
             {
                 orientation.Movement = 1 * (int)sensitivitySlider.Value;
-                orientation.Sensivity = (int)sensitivitySlider.Value;
+                orientation.Sensitivity = (int)sensitivitySlider.Value;
                 ConnectAndPublish(orientation.SerializeOrientation());
             }
         }
@@ -119,7 +119,7 @@ namespace RCat_Controller
             if (BtnRotateLeft.IsPressed)
             {
                 orientation.Rotation -= 1 * (int)sensitivitySlider.Value;
-                orientation.Sensivity = (int)sensitivitySlider.Value;
+                orientation.Sensitivity = (int)sensitivitySlider.Value;
                 ConnectAndPublish(orientation.SerializeOrientation());
             }
         }
@@ -137,7 +137,7 @@ namespace RCat_Controller
             if (BtnRotateRight.IsPressed)
             {
                 orientation.Rotation += 1 * (int)sensitivitySlider.Value;
-                orientation.Sensivity = (int)sensitivitySlider.Value;
+                orientation.Sensitivity = (int)sensitivitySlider.Value;
                 ConnectAndPublish(orientation.SerializeOrientation());
             }
         }
@@ -155,7 +155,7 @@ namespace RCat_Controller
             if (BtnMoveDown.IsPressed)
             {
                 orientation.Movement = -1 * (int)sensitivitySlider.Value;
-                orientation.Sensivity = (int)sensitivitySlider.Value;
+                orientation.Sensitivity = (int)sensitivitySlider.Value;
                 ConnectAndPublish(orientation.SerializeOrientation());
             }
         }
@@ -262,8 +262,8 @@ namespace RCat_Controller
         private int movement;
         public int Movement { get { return movement; } set {  movement = value; } }
 
-        private int sensivity;
-        public int Sensivity { get { return sensivity; } set { sensivity = value; } }
+        private int sensitivity;
+        public int Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
 
         public Orientation() { rotation = 0; Movement = 0; }
         
