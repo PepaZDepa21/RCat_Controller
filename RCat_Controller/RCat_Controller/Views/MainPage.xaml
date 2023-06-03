@@ -9,7 +9,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="35"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.2*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <ListView x:Name="ActionsLW" SeparatorVisibility="None" Grid.Row="0">
@@ -44,6 +44,7 @@
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -52,10 +53,12 @@
                     <ColumnDefinition Width="45"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ImageButton Grid.Column="2" Grid.Row="1" Source="Up.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnMoveUpClicked"/>
-                <ImageButton Grid.Column="1" Grid.Row="2" Source="Left.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnRotationLeftClicked"/>
-                <ImageButton Grid.Column="3" Grid.Row="2" Source="Right.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnRotationRightClicked"/>
-                <ImageButton Grid.Column="2" Grid.Row="3" Source="Down.png" BackgroundColor="White" Aspect="AspectFit" Clicked="BtnMoveDownClicked"/>
+                <ImageButton x:Name="BtnMoveUp" Grid.Column="2" Grid.Row="1" Source="Up.png" BackgroundColor="White" Aspect="AspectFit" Pressed="BtnMoveUpPressed" Released="BtnMoveUpReleased"/>
+                <ImageButton x:Name="BtnRotateLeft" Grid.Column="1" Grid.Row="2" Source="Left.png" BackgroundColor="White" Aspect="AspectFit" Pressed="BtnRotationLeftPressed" Released="BtnRotationLeftReleased"/>
+                <Label x:Name="LbSensitivity" Grid.Row="2" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                <ImageButton x:Name="BtnRotateRight" Grid.Column="3" Grid.Row="2" Source="Right.png" BackgroundColor="White" Aspect="AspectFit" Pressed="BtnRotationRightPressed" Released="BtnRotationRightReleased"/>
+                <ImageButton x:Name="BtnMoveDown" Grid.Column="2" Grid.Row="3" Source="Down.png" BackgroundColor="White" Aspect="AspectFit" Pressed="BtnMoveDownPressed" Released="BtnMoveDownReleased"/>
+                <Slider x:Name="sensitivitySlider" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Minimum="0" Maximum="90" ValueChanged="OnSliderValueChanged" MinimumTrackColor="Black" ThumbColor="#00A9A5"/>
             </Grid>
         </Grid>
     </StackLayout>

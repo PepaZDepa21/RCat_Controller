@@ -16,17 +16,22 @@ using MQTTnet.Client;
 using MQTTnet.Protocol;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Timers;
+using System.Threading;
+using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
 namespace RCat_Controller
 {
     public partial class MainPage : ContentPage
     {
         Orientation orientation = new Orientation();
+        System.Threading.Timer timer;
         public  MainPage()
         {
             InitializeComponent();
             Title = "RCat Controller";
             BackgroundColor = Color.White;
+            LbSensitivity.Text = sensitivitySlider.Value.ToString();
             ReadActionsFromFile();
         }
         public void UpdateActionsListView()
@@ -82,26 +87,81 @@ namespace RCat_Controller
                 ConnectAndPublish(a.SerializeAction());
             }
         }
-        private void BtnMoveUpClicked(object sender, EventArgs e)
+
+        private void BtnMoveUpPressed(object sender, EventArgs e)
         {
-            orientation.Movement = 1;
-            ConnectAndPublish(orientation.SerializeOrientation());
+            timer = new System.Threading.Timer(OnBtnUpTimerElapsed, null, 0, 200);
         }
-        private void BtnRotationLeftClicked(object sender, EventArgs e)
+        private void BtnMoveUpReleased(object sender, EventArgs e)
         {
-            orientation.Rotation -= 1;
-            ConnectAndPublish(orientation.SerializeOrientation());
+            timer.Dispose();
         }
-        private void BtnRotationRightClicked(object sender, EventArgs e)
+        private void OnBtnUpTimerElapsed(object state)
         {
-            orientation.Rotation += 1;
-            ConnectAndPublish(orientation.SerializeOrientation());
+            if (BtnMoveUp.IsPressed)
+            {
+                orientation.Movement = 1 * (int)sensitivitySlider.Value;
+                ConnectAndPublish(orientation.SerializeOrientation());
+            }
         }
-        private void BtnMoveDownClicked(object sender, EventArgs e)
+
+        private void BtnRotationLeftPressed(object sender, EventArgs e)
         {
-            orientation.Movement = -1;
-            ConnectAndPublish(orientation.SerializeOrientation());
+            timer = new System.Threading.Timer(OnBtnLeftTimerElapsed, null, 0, 200);
         }
+        private void BtnRotationLeftReleased(object sender, EventArgs e)
+        {
+            timer.Dispose();
+        }
+        private void OnBtnLeftTimerElapsed(object state)
+        {
+            if (BtnRotateLeft.IsPressed)
+            {
+                orientation.Rotation -= 1 * (int)sensitivitySlider.Value;
+                ConnectAndPublish(orientation.SerializeOrientation());
+            }
+        }
+
+        private void BtnRotationRightPressed(object sender, EventArgs e)
+        {
+            timer = new System.Threading.Timer(OnBtnRightTimerElapsed, null, 0, 200);
+        }
+        private void BtnRotationRightReleased(object sender, EventArgs e)
+        {
+            timer.Dispose();
+        }
+        private void OnBtnRightTimerElapsed(object state)
+        {
+            if (BtnRotateRight.IsPressed)
+            {
+                orientation.Rotation += 1 * (int)sensitivitySlider.Value;
+                ConnectAndPublish(orientation.SerializeOrientation());
+            }
+        }
+
+        private void BtnMoveDownPressed(object sender, EventArgs e)
+        {
+            timer = new System.Threading.Timer(OnBtnDownTimerElapsed, null, 0, 200);
+        }
+        private void BtnMoveDownReleased(object sender, EventArgs e)
+        {
+            timer.Dispose();
+        }
+        private void OnBtnDownTimerElapsed(object state)
+        {
+            if (BtnMoveDown.IsPressed)
+            {
+                orientation.Movement = -1 * (int)sensitivitySlider.Value;
+                ConnectAndPublish(orientation.SerializeOrientation());
+            }
+        }
+
+        private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            int value = (int)sensitivitySlider.Value;
+            LbSensitivity.Text = value.ToString();
+        }
+
         public async void ConnectAndPublish(string textToSend)
         {
             var factory = new MqttFactory();
@@ -124,6 +184,7 @@ namespace RCat_Controller
 
             await client.DisconnectAsync();
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -178,13 +239,13 @@ namespace RCat_Controller
             get => rotation; 
             set 
             {
-                if (value == 360)
+                if (value >= 360)
                 {
-                    rotation = 0;
+                    rotation = value % 360;
                 }
-                else if (value == -1)
+                else if (value <= -1)
                 {
-                    rotation = 359;
+                    rotation = 360 + value;
                 }
                 else
                 {
