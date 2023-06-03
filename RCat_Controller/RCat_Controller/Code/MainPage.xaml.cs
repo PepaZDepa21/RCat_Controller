@@ -72,7 +72,7 @@ namespace RCat_Controller
 
         private async void BtnAddClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditAction(new Action(), ""));
+            await Navigation.PushAsync(new EditAction(new Action(), "", false));
         }
         private async void BtnActionClicked(object sender, EventArgs e)
         {
@@ -80,7 +80,7 @@ namespace RCat_Controller
             Action a = Action.AllActions[Action.AllActions.IndexOf((Action)button.BindingContext)];
             if (CBEnableEditing.IsChecked)
             {
-                await Navigation.PushAsync(new EditAction(a, "Edit"));
+                await Navigation.PushAsync(new EditAction(a, "Edit", true));
             }
             else
             {

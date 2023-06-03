@@ -11,12 +11,15 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Label Text="Action name" Grid.Row="0" TextColor="Black" VerticalOptions="Center"/>
             <Entry Text="{Binding Name}" Grid.Row="1"/>
             <Label Text="Action description" Grid.Row="2" TextColor="Black" VerticalOptions="Center"/>
             <Editor x:Name="DescriptionEditor" Text="{Binding Description}" Keyboard="Plain" AutoSize="TextChanges" Grid.Row="3"/>
-            <Button Padding="50, 0" Text="Save" Grid.Row="5" BackgroundColor="Black" TextColor="White" Clicked="BtnSaveClicked"/>
+            <Button Padding="50, 0" Text="Save" Grid.Row="7" BackgroundColor="Black" TextColor="White" Clicked="BtnSaveClicked"/>
+            <Button x:Name="BtnDelete" Padding="50, 0" Text="Delete" Grid.Row="5" BackgroundColor="Red" TextColor="White" Clicked="BtnDeleteClicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

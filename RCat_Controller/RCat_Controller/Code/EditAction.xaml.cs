@@ -15,7 +15,7 @@ namespace RCat_Controller
         Action a = new Action();
         string args = "";
         int index = 0;
-        public EditAction(Action action, string arg)
+        public EditAction(Action action, string arg, bool hideDelete)
         {
             InitializeComponent();
             args = arg;
@@ -26,7 +26,9 @@ namespace RCat_Controller
                 
             }
             BindingContext = a;
+            BtnDelete.IsVisible = hideDelete;
         }
+
         private async void BtnSaveClicked(object sender, EventArgs e)
         {
             if (CheckAction())
@@ -45,6 +47,23 @@ namespace RCat_Controller
             else
             {
                 await DisplayAlert("Unable to save", "Some values are inappropriate!", "Ok");
+            }
+        }
+        private async void BtnDeleteClicked(object sender, EventArgs e)
+        {
+            if (await DisplayAlert($"Delete {a.Name}", $"Do you want to delete {a.Name}?", "Yes", "No"))
+            {
+                try
+                {
+                    Action actionToDelete = Action.AllActions.Find(action => action.Id == a.Id);
+                    Action.AllActions.Remove(actionToDelete);
+                    await Navigation.PopAsync();
+                }
+                catch (Exception)
+                {
+                    await Navigation.PopAsync();
+                }
+                
             }
         }
         public bool CheckAction()
