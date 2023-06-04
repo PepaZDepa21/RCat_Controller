@@ -6,9 +6,9 @@
     <ContentPage.Content>
         <Grid Margin="25">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
@@ -20,7 +20,7 @@
             <Label Text="Action description" Grid.Row="2" TextColor="Black" VerticalOptions="Center"/>
             <Editor x:Name="DescriptionEditor" Text="{Binding Description}" TextColor="Black" Keyboard="Plain" AutoSize="TextChanges" Grid.Row="3"/>
             <Button Padding="50, 0" Text="Save" Grid.Row="7" BackgroundColor="Black" TextColor="White" Clicked="BtnSaveClicked"/>
-            <Button x:Name="BtnDelete" Padding="50, 0" Text="Delete" Grid.Row="5" BackgroundColor="Red" TextColor="Black" Clicked="BtnDeleteClicked"/>
+            <Button x:Name="BtnDelete" Padding="50, 0" Text="Delete" Grid.Row="5" BackgroundColor="Red" TextColor="White" Clicked="BtnDeleteClicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
